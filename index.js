@@ -10,7 +10,9 @@ if(process.env.NODE_ENV === "production") { //배포모드
     console.log('DEV');
 }
 
-
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
 
 app.get("/api/ranks",(req, res) => {
     const connection = mysql.createConnection({
