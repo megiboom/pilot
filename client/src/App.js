@@ -15,14 +15,14 @@ class App extends Component {
   _renderTeams = () => {
     const teams = this.state.teams.map(team => {
       return (
-        <Team key = {team.team_ID} 
-          team_ID ={team.team_ID}
-          team_Eng={team.team_name_Eng}
-          team_Kor={team.team_name_Kor}
-          team_Sho={team.team_name_Short}
+        <Team key = {team.team_id} 
+          team_ID ={team.team_id}
+          team_Eng={team.team_name_eng}
+          team_Kor={team.team_name_kor}
+          team_Sho={team.team_name_short}
           team_Sta={team.team_stadium}
-          team_StC={team.team_stadium_Capacity}
-          team_Loc={team.team_Location}
+          team_StC={team.team_stadium_capacity}
+          team_Loc={team.team_location}
           team_Man={team.team_manager}
           team_Ran={team.rank_team}
           team_bad={team.poster_path}
@@ -41,7 +41,7 @@ class App extends Component {
 
   _callApi = () => {
     return fetch(
-      "/api/teams"
+      "/api/test"
     )
       .then(data => data.json())
       .catch(err => console.log(err));

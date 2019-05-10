@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const pg = require('pg');
 
 const app = express();
 
@@ -58,6 +59,38 @@ app.get("/api/teams",(req, res) => {
             res.send(err);
         }
     });
+});
+
+const config = {
+    /*host: '192.168.0.152',
+    user: 'postgres',
+    database: 'test',
+    password: '1123',
+    port: 5432*/
+    host: 'ec2-23-23-228-132.compute-1.amazonaws.com',
+    user: 'qycrdqbyahxetd',
+    password: '32c61acaa21d6eea06935b02c9bca8dc704806ffa1ba3ad8ca647376c438df79',
+    database: 'd5664ruc6g6v5l',
+    port: 5432,
+    ssl: true
+};
+
+app.get("/api/test",(req, res) => {
+    var pool = new pg.Pool(config);
+    pool.connect(function(err, client) { 
+        if(err) {
+            console.log("Can not connect to DB " + err)
+        }
+        client.query('select aa.*, bb.rank_team, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
+            if(err) {
+                console.log(err);
+                res.status(400).send(err);
+            }
+            console.log(result.rows);
+            res.status(200).send(result.rows);
+        }); 
+    });
+    pool.end();
 });
 
 const PORT = process.env.PORT || 5000;
