@@ -1,14 +1,12 @@
 const express = require('express');
 const mysql = require('mysql');
 const pg = require('pg');
+const path = require('path');
 
 const app = express();
 
 if(process.env.NODE_ENV === "production") { //배포모드
-    console.log('PRODUCTION');
     app.use(express.static(path.join(__dirname, "client/build")));
-}else{
-    console.log('DEV');
 }
 
 app.get("/", (req, res) => {
