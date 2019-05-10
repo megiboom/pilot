@@ -3,6 +3,9 @@ const mysql = require('mysql');
 const pg = require('pg');
 const path = require('path');
 
+const request = require('request');
+const cheerio = require('cheerio');
+
 const app = express();
 
 if(process.env.NODE_ENV === "production") { //배포모드
@@ -12,6 +15,15 @@ if(process.env.NODE_ENV === "production") { //배포모드
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
+
+app.get("/crawlingTest", function(req, res, next){
+    let url = "https://www.oddschecker.com/football/english/premier-league";
+
+    request(url, function(error, response, body){
+        console.log(body)
+        res.send(body);
+    });
+})
 
 app.get("/api/ranks",(req, res) => {
     const connection = mysql.createConnection({
