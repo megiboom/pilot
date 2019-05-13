@@ -77,10 +77,10 @@ const config = {
     database: 'test',
     password: '1123',
     port: 5432*/
-    host: 'ec2-23-23-228-132.compute-1.amazonaws.com',
-    user: 'qycrdqbyahxetd',
-    password: '32c61acaa21d6eea06935b02c9bca8dc704806ffa1ba3ad8ca647376c438df79',
-    database: 'd5664ruc6g6v5l',
+    host: 'ec2-75-101-128-10.compute-1.amazonaws.com',
+    user: 'uncchwbvxutngo',
+    password: 'd4588296df74581072054ebaecdb44fd14ccc49c14a1d86e285ff27a964de9d3',
+    database: 'd9qnqnh0i4mcv7',
     port: 5432,
     ssl: true
 };
