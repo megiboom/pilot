@@ -86,6 +86,7 @@ const config = {
 };
 
 app.get("/api/test",(req, res) => {
+    console.log(config);
     var pool = new pg.Pool(config);
     pool.connect(function(err, client) { 
         if(err) {
