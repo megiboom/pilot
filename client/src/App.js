@@ -41,7 +41,7 @@ class App extends Component {
 
   _callApi = () => {
     return fetch(
-      "/api/test"
+      "/api/teams"
     )
       .then(data => data.json())
       .catch(err => console.log(err));
