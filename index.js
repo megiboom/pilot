@@ -1,7 +1,10 @@
+require('console-stamp')(console, 'yyyy/mm/dd HH:MM:ss.l');
+
 const express = require('express');
 const mysql = require('mysql');
 const pg = require('pg');
 const path = require('path');
+const crawl = require('./crawl/crawlK');
 
 const schedule = require('node-schedule');
 
@@ -14,13 +17,13 @@ if(process.env.NODE_ENV === "production") { //배포모드
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
-
+  
 //매일 24시마다 EPL 최신화
 var scheduler = schedule.scheduleJob('* * 24 * * *', function(){ 
     const crawl = require('./crawl/crawlE');
 });
 
-//매일 24시마다 K리그 최신화
+//매일 12시마다 K리그 최신화
 var schedulerK = schedule.scheduleJob('* * 12 * * *', function(){ 
     const crawl = require('./crawl/crawlK');
 });
@@ -40,7 +43,7 @@ app.get("/api/teams",(req, res) => {
         if(err) {
             console.log("Can not connect to DB " + err)
         }
-        client.query('select aa.*, bb.rank_team, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
+        client.query('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
             if(err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -57,7 +60,7 @@ app.get("/api/teamsK",(req, res) => {
         if(err) {
             console.log("Can not connect to DB " + err)
         }
-        client.query('select aa.*, bb.rank_team, cc.poster_path from teams_klc aa left join teamranks_klc bb on aa.team_ID = bb.rank_team left join badge_klc cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
+        client.query('select aa.*, cc.poster_path from teams_klc aa left join teamranks_klc bb on aa.team_ID = bb.rank_team left join badge_klc cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
             if(err) {
                 console.log(err);
                 res.status(400).send(err);

@@ -9,6 +9,7 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
+    document.title = "K리그 순위"
     this._getTeams();
   }
 
@@ -24,7 +25,7 @@ class App extends Component {
           team_StC={team.team_stadium_capacity}
           team_Loc={team.team_location}
           team_Man={team.team_manager}
-          team_Ran={team.rank_team}
+          team_Ran={team.team_rank}
           team_bad={team.poster_path}
         />
       );
