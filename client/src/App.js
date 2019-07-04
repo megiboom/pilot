@@ -9,7 +9,6 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
-    document.title = "K리그 순위"
     this._getTeams();
   }
 

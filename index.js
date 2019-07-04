@@ -1,10 +1,10 @@
 require('console-stamp')(console, 'yyyy/mm/dd HH:MM:ss.l');
 
 const express = require('express');
-const mysql = require('mysql');
 const pg = require('pg');
 const path = require('path');
-const crawl = require('./crawl/crawlK');
+
+const requestIP = require('request-ip');
 
 const schedule = require('node-schedule');
 
@@ -43,6 +43,7 @@ app.get("/api/teams",(req, res) => {
         if(err) {
             console.log("Can not connect to DB " + err)
         }
+        console.log('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc');
         client.query('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
             if(err) {
                 console.log(err);
@@ -55,11 +56,13 @@ app.get("/api/teams",(req, res) => {
 });
 
 app.get("/api/teamsK",(req, res) => {
+    console.log(requestIP.getClientIp(req));
     var pool = new pg.Pool(config);
     pool.connect(function(err, client) { 
         if(err) {
             console.log("Can not connect to DB " + err)
         }
+        console.log('select aa.*, cc.poster_path from teams_klc aa left join teamranks_klc bb on aa.team_ID = bb.rank_team left join badge_klc cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc');
         client.query('select aa.*, cc.poster_path from teams_klc aa left join teamranks_klc bb on aa.team_ID = bb.rank_team left join badge_klc cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
             if(err) {
                 console.log(err);
@@ -71,51 +74,6 @@ app.get("/api/teamsK",(req, res) => {
     pool.end();
 });
 
-// app.get("/api/ranks",(req, res) => {
-//     const connection = mysql.createConnection({
-//         host: 'localhost',
-//         post: 3306,
-//         user: 'root',
-//         password: '1234',
-//         database: 'epl'
-//     });
-//     connection.connect();
-//     connection.query('call sp_getrank()', function(err, rows, fields){
-//         connection.end();
-//         if(!err) {
-//             console.log(rows);
-//             const result = JSON.stringify(rows);
-//             res.send(result);
-//         }else{
-//             console.log('query error: ' + err);
-//             res.send(err);
-//         }
-//     });
-// });
-
-// app.get("/api/teams",(req, res) => {
-//     //res.sendFile(path.join(__dirname, "client/build", "index.html"));
-//     const connection = mysql.createConnection({
-//         host: 'localhost',
-//         post: 3306,
-//         user: 'root',
-//         password: '1234',
-//         database: 'epl'
-//     });
-//     connection.connect();
-//     connection.query('select aa.*, bb.rank_team, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc'
-//         , function(err, rows, fields){
-//         connection.end();
-//         if(!err) {
-//             console.log(rows);
-//             const result = JSON.stringify(rows);
-//             res.send(result);
-//         }else{
-//             console.log('query error: ' + err);
-//             res.send(err);
-//         }
-//     });
-// });
 
 const PORT = process.env.PORT || 5000;
 
