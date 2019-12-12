@@ -1,0 +1,30 @@
+2019-07-30T06:40:17.389Z [winston-test] error: uncaughtException: logger is not defined
+ReferenceError: logger is not defined
+    at Server.app.listen (d:\React\pilot\index.js:96:5)
+    at Object.onceWrapper (events.js:277:13)
+    at Server.emit (events.js:189:13)
+    at emitListeningNT (net.js:1304:10)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:757:11)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+2019-07-30T06:40:29.058Z [winston-test] error: uncaughtException: Cannot read property 'info' of undefined
+TypeError: Cannot read property 'info' of undefined
+    at Server.app.listen (d:\React\pilot\index.js:96:20)
+    at Object.onceWrapper (events.js:277:13)
+    at Server.emit (events.js:189:13)
+    at emitListeningNT (net.js:1304:10)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:757:11)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+2019-07-30T06:40:37.827Z [winston-test] error: uncaughtException: Cannot read property 'info' of undefined
+TypeError: Cannot read property 'info' of undefined
+    at Server.app.listen (d:\React\pilot\index.js:96:20)
+    at Object.onceWrapper (events.js:277:13)
+    at Server.emit (events.js:189:13)
+    at emitListeningNT (net.js:1304:10)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:757:11)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)

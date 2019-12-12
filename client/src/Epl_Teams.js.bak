@@ -1,0 +1,69 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Epl_Teams.css';
+
+function Team({team_ID ,team_Eng,team_Kor,team_Sho,team_Sta,team_StC,team_Loc,team_Man,team_Ran,team_bad,team_win,team_los,team_drw,team_lst}){
+    return (
+        <div className="Team">
+            <div className="Team__Column">
+                <TeamBadge badge={team_bad} alt={team_ID} />
+            </div>   
+            <div className="Team__Column">
+                <h1>{team_Eng} ({team_Sho})</h1>
+                <h3>{team_Kor}</h3>
+                <div className="Team__Genres">
+					<table>
+						<tbody>
+						<tr>
+							<td>Stadium:{team_Sta}</td>
+							<td>Win:{team_win}</td>
+						</tr>
+						<tr>
+							<td>Capacity:  {team_StC}</td>
+							<td>Draw: {team_drw}</td>
+						</tr>
+						<tr>
+							<td>Location:  {team_Loc} </td>
+							<td>Lose: {team_los}</td>
+						</tr>
+						<tr>
+							<td>Manager:   {team_Man}</td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
+                </div>
+		        <div className="Team__Update">Lastest Update: {team_lst}</div>
+            </div>
+        </div>
+    )
+}
+
+function TeamBadge({badge, alt}){
+    return (
+        <img src={badge} alt={alt} title={alt} className="Team__Badge" />
+    )
+}
+
+Team.propTypes = {
+     team_ID: PropTypes.number.isRequired
+    ,team_Eng: PropTypes.string.isRequired
+    ,team_Kor: PropTypes.string.isRequired
+    ,team_Sho: PropTypes.string.isRequired
+    ,team_Sta: PropTypes.string.isRequired
+    ,team_StC: PropTypes.number.isRequired
+    ,team_Loc: PropTypes.string.isRequired
+    ,team_Man: PropTypes.string.isRequired
+    ,team_Ran: PropTypes.number.isRequired
+    ,team_bad: PropTypes.string.isRequired
+    ,team_win: PropTypes.number.isRequired
+    ,team_los: PropTypes.number.isRequired
+    ,team_drw: PropTypes.number.isRequired
+    ,team_lst: PropTypes.string.isRequired
+}
+
+TeamBadge.propTypes = {
+    badge: PropTypes.string.isRequired
+}
+
+export default Team
