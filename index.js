@@ -43,8 +43,8 @@ app.get("/api/teams",(req, res) => {
         if(err) {
             console.log("Can not connect to DB " + err)
         }
-        console.log('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc');
-        client.query('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
+        console.log('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id where aa.team_league = "Premier League" order by (bb.rank_win * 3)+(bb.rank_draw*1) desc');
+        client.query('select aa.*, cc.poster_path from teams aa left join teamranks bb on aa.team_ID = bb.rank_team left join badge cc on aa.team_ID = cc.poster_id where aa.team_league = "Premier League" order by (bb.rank_win * 3)+(bb.rank_draw*1) desc',function(err, result){
             if(err) {
                 console.log(err);
                 res.status(400).send(err);
